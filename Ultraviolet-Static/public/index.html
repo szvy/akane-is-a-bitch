@@ -1,0 +1,67 @@
+<html>
+<head>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+   <link rel="stylesheet" href="../css/index.css">
+   <link rel="icon" type="image/x-icon" href="https://www.google.com/favicon.ico">
+   <script src="/particles.js"></script>
+   <script src="/app.js"></script>
+
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+   <title>calculator - Google Search</title>
+</head>
+<body>
+
+   <div id="particles-js"></div>
+   
+   
+   <div id="content">
+      <h1 id="title">Szvy Central Minified</h1>
+      <p class="smallahhtext">this is only being made so that akane doesnt fucking assinate me, cuz akane is a bitch 🙏</p>
+
+      <form id="uv-form">
+        <input id="uv-search-engine" value="https://www.google.com/search?q=%s" type="hidden"> 
+        <input id="uv-address" type="text" placeholder="Search freely with Szvy Central..." class="form__input" autocomplete="off">
+
+         <div class="desc left-margin">
+            <p id="uv-error"></p>
+            <pre id="uv-error-code"></pre>
+         </div>
+
+         <script src="/szvy/uv.bundle.js" defer></script>
+         <script src="/szvy/uv.config.js?cdn" defer></script>
+         <script>
+           const form = document.querySelector("#uv-form");
+     const input = document.querySelector("#uv-address");
+     
+     document.addEventListener("DOMContentLoaded", function () {
+       form.addEventListener("submit", async (event) => {
+         event.preventDefault();
+         window.navigator.serviceWorker
+           .register("/szvy/sw.js", {
+             scope: __uv$config.prefix,
+           })
+           .then(() => {
+             let url = input.value.trim();
+             if (!isUrl(url)) url = "https://www.google.com/search?hl=en-us&q=" + url;
+             else if (!(url.startsWith("https://") || url.startsWith("http://")))
+               url = "http://" + url;
+             sessionStorage.setItem("encodedUrl", __uv$config.encodeUrl(url));
+             location.href = "math.html";
+           });
+       });
+     });
+     
+     function isUrl(val = "") {
+       if (
+         /^http(s?):\/\//.test(val) ||
+         (val.includes(".") && val.slice(0, 1) !== " ")
+       )
+         return true;
+       return false;
+     }
+     
+         </script>
+   </div>
+</body>
+</html>

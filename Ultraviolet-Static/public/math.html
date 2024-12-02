@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <link rel="stylesheet" href="/search.css">
+    <link rel="icon" type="image/x-icon" href="https://www.google.com/favicon.ico">
+ 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>calculator - Google Search</title>
+</head>
+<body>
+    <header>
+        <img class="logo" src="https://szvy.gay/assets/logo.png" onclick="window.location.href='/';">
+        <form id="uv-form">
+            <input id="uv-search-engine" value="https://www.google.com/search?hl=en-us&q=%s" type="hidden"/> 
+            <input id="uv-address-searchbar" type="text" placeholder="search anything..." class="form__input"/>
+          </form>
+  <div class="navbar-right">
+          <div id="the-button-container">
+            <button id="stupidpxycontrols" onclick="goback()"><img id="roddrickiliousnotfinanciallystablemathmaticallyacurateretangularprism" src="/images/back.svg" width="55px" height="55px" ></img></button>
+            <button id="stupidpxycontrols" onclick="rotatetozone()"><img id="roddrickiliousnotfinanciallystablemathmaticallyacurateretangularprism" src="/images/forward.svg" width="55px" height="55px" ></img></button>
+            <button id="stupidpxycontrols" onclick="fn_reload()"><img id="roddrickiliousnotfinanciallystablemathmaticallyacurateretangularprism" src="/images/reload.svg" width="55px" height="55px" ></img></button>
+          </div>
+        </div>
+    </header>
+    <iframe src="" id="iframeid" style="bottom: 0" marginheight="0px" marginwidth="0px"  allowfullscreen></iframe>
+    <style>
+        #uv-form{
+            padding: 3px;
+            height: 0
+        }
+    </style>
+         <script src="szvy/uv.bundle.js" defer></script>
+         <script src="szvy/uv.config.js" defer></script>
+         <script src="register-sw.js" defer></script>
+         <script src="search.js" defer></script>
+         <script src="/sys/frame.js" defer></script>
+         <script src="index.js" defer></script>
+    <script>
+          function fn_reload(){
+              var iframe = document.getElementById('iframeid');
+              iframe.src = iframe.contentWindow.location.href;
+          }
+          function goFullscreen(id) {
+        var element = document.getElementById(id);
+        if (element.mozRequestFullScreen) {
+          element.mozRequestFullScreen();
+        } else if (element.webkitRequestFullScreen) {   
+          element.webkitRequestFullScreen();
+        }
+    }
+    function goback(){
+      iframe.contentWindow.history.back()
+    }
+    function rotatetozone(){
+      iframe.contentWindow.history.forward()
+    }
+
+const iframe = document.querySelector('iframe');
+let lastURL = '';
+
+function checkIframeURL() {
+    try {
+        const currentURL = iframe.contentWindow.location.href;
+
+        if (currentURL !== lastURL) {
+            console.log(`Iframe URL changed to: ${currentURL}`);
+            lastURL = currentURL;
+const websitePath = currentURL
+        .replace(window.location.origin, "")
+        .replace("/szvy/szvy/", "");
+      localStorage.setItem("decoded", websitePath);
+      const decodedValue = __uv$config.decodeUrl(websitePath);
+      document.getElementById("uv-address-searchbar").value = decodedValue;
+        }
+    } catch (error) {
+        console.error('Cannot access iframe URL due to cross-origin policy');
+    }
+}
+
+setInterval(checkIframeURL, 1000);
+    </script>
+</body>
+
+</html>
